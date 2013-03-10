@@ -1,0 +1,33 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+  version="2.0">
+  
+  <persistence-unit name="client-invoicing" transaction-type="RESOURCE_LOCAL">
+  
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    
+    <class>org.afrosoft.clientinvoicing.domain.Contact</class>
+    <class>org.afrosoft.clientinvoicing.domain.Address</class>
+    <class>org.afrosoft.clientinvoicing.domain.Client</class>
+    <class>org.afrosoft.clientinvoicing.domain.Project</class>
+    <class>org.afrosoft.clientinvoicing.domain.Employee</class>
+    <class>org.afrosoft.clientinvoicing.domain.Timesheet</class>
+    
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    
+    <properties>
+      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/clientinvoicing"/>
+      <property name="javax.persistence.jdbc.user" value="kelechi"/>
+      <property name="javax.persistence.jdbc.password" value="owerri82"/>
+      <property name="eclipselink.logging.level" value="FINEST"/>
+      <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+      <property name="eclipselink.create-ddl-jdbc-file-name" value="create-client-invoicing.sql"/>
+      <property name="eclipselink.drop-ddl-jdbc-file-name" value="drop-client-invoicing.sql"/>
+      <property name="eclipselink.ddl-generation.output-mode" value="both"/>
+    </properties>
+    
+  </persistence-unit>
+  
+</persistence>

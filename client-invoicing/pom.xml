@@ -3,24 +3,33 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.afrosoft</groupId>
-  <artifactId>jpa-tutorials</artifactId>
+  <artifactId>client-invoicing</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <name>jpa-tutorials</name>
+  <name>client-invoicing</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <springframework.version>3.2.0.RELEASE</springframework.version>
+    <eclipselink.version>2.4.0</eclipselink.version>
+    <postresql.version>9.1-901.jdbc4</postresql.version>
     <slf4j.version>1.7.2</slf4j.version>
     <logback.version>1.0.9</logback.version>
   </properties>
+  
+  <repositories>
+    <repository>
+      <id>EclipseLink</id>
+      <url>http://download.eclipse.org/rt/eclipselink/maven.repo</url>
+    </repository>
+  </repositories>
 
   <modules>
-    <module>sample-domain</module>
-    <!--module>hr-repository</module>
-    <module>hr-service</module>
-    <module>hr-web</module-->
+    <module>client-invoicing-domain</module>
+    <!--module>client-invoicing-repository</module>
+    <module>client-invoicing-service</module>
+    <module>client-invoicing-web</module-->
   </modules>
 
   <dependencyManagement>
@@ -82,9 +91,14 @@
         <version>2.0.0</version>
       </dependency>
       <dependency>
+        <groupId>org.eclipse.persistence</groupId>
+        <artifactId>org.eclipse.persistence.jpa</artifactId>
+        <version>${eclipselink.version}</version>
+      </dependency>
+      <dependency>
         <groupId>postgresql</groupId>
         <artifactId>postgresql</artifactId>
-        <version>7.4.1</version>
+        <version>${postresql.version}</version>
       </dependency>
       <!--<dependency>
         <groupId></groupId>
