@@ -6,6 +6,7 @@
     <groupId>org.afrosoft</groupId>
     <artifactId>client-invoicing</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <relativePath>../client-invoicing/pom.xml</relativePath>
   </parent>
   
   <artifactId>client-invoicing-domain</artifactId>
@@ -46,5 +47,9 @@
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
     </dependency>
+     <dependency>
+       <groupId>org.springframework</groupId>
+       <artifactId>spring-core</artifactId>
+     </dependency>
   </dependencies>
 </project>

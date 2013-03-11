@@ -99,5 +99,15 @@ public class Project {
 	public void setTimesheet(Set<Timesheet> timesheet) {
 		this.timesheet = timesheet;
 	}
+
+	@Override
+  public String toString() {
+	  return new StringBuilder().
+	  		append("Project[id=").append(id).
+	  		append(", name=").append(name).
+	  		append(", start date=").append(startDate).
+	  		append(", end date=").append(endDate).
+	  		append("]").toString();
+  }
 	
 }

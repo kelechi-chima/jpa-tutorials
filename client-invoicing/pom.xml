@@ -26,10 +26,7 @@
   </repositories>
 
   <modules>
-    <module>client-invoicing-domain</module>
-    <!--module>client-invoicing-repository</module>
-    <module>client-invoicing-service</module>
-    <module>client-invoicing-web</module-->
+    <module>../client-invoicing-domain</module>
   </modules>
 
   <dependencyManagement>

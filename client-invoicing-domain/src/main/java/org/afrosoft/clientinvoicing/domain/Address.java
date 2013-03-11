@@ -50,5 +50,16 @@ public class Address {
 	public void setPostcode(String postcode) {
 		this.postcode = postcode;
 	}
+
+	@Override
+  public String toString() {
+	  return new StringBuilder().
+	  		append("Address[line1=").append(line1).
+	  		append(", line2=").append(line2).
+	  		append(", line3=").append(line3).
+	  		append(", line4=").append(line4).
+	  		append(", postcode=").append(postcode).
+	  		append("]").toString();
+  }
 	
 }

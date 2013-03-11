@@ -41,5 +41,15 @@ public class Contact {
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
+
+	@Override
+  public String toString() {
+	  return new StringBuilder().
+	  		append("Contact[firstname=").append(firstname).
+	  		append(", surname=").append(surname).
+	  		append(", email=").append(email).
+	  		append(", telephone=").append(telephone).
+	  		append("]").toString();
+  }
 	
 }

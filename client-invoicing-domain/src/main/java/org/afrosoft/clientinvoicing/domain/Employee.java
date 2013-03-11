@@ -128,4 +128,16 @@ public class Employee {
 		this.timesheets = timesheets;
 	}
 
+	@Override
+  public String toString() {
+	  return new StringBuilder().
+	  		append("Employee[id=").append(id).
+	  		append(", firstname=").append(firstname).
+	  		append(", surname=").append(surname).
+	  		append(", dob=").append(dateOfBirth).
+	  		append(", role=").append(role).
+	  		append(", rate=").append(rate).
+	  		append("]").toString();
+  }
+
 }

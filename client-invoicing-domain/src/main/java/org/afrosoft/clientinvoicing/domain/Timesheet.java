@@ -86,5 +86,15 @@ public class Timesheet {
 	public void setProject(Project project) {
 		this.project = project;
 	}
+
+	@Override
+  public String toString() {
+	  return new StringBuilder().
+	  		append("Timesheet[id=").append(id).
+	  		append(", entry date=").append(entryDate).
+	  		append(", description=").append(description).
+	  		append(", hours worked=").append(hoursWorked).
+	  		append("]").toString();
+  }
 	
 }

@@ -22,10 +22,10 @@
       <property name="javax.persistence.jdbc.user" value="kelechi"/>
       <property name="javax.persistence.jdbc.password" value="owerri82"/>
       <property name="eclipselink.logging.level" value="FINEST"/>
-      <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+      <!-- property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
       <property name="eclipselink.create-ddl-jdbc-file-name" value="create-client-invoicing.sql"/>
       <property name="eclipselink.drop-ddl-jdbc-file-name" value="drop-client-invoicing.sql"/>
-      <property name="eclipselink.ddl-generation.output-mode" value="both"/>
+      <property name="eclipselink.ddl-generation.output-mode" value="both"/-->
     </properties>
     
   </persistence-unit>
