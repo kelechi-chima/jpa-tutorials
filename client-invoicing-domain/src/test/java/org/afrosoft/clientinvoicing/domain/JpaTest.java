@@ -18,28 +18,28 @@ public class JpaTest {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(JpaTest.class);
 	
-	private static final String CLIENT_NAME = "Virgin Money Giving Ltd";
-	private static final String CONTACT_FIRSTNAME = "James";
-	private static final String CONTACT_SURNAME = "Cousins";
-	private static final String CONTACT_EMAIL = "james.cousins@virginmoneygiving.com";
-	private static final String CONTACT_TELEPHONE = "01603 123456";
-	private static final String ADDRESS_LINE_1 = "Discovery House";
-	private static final String ADDRESS_LINE_2 = "Whiting Road";
-	private static final String ADDRESS_LINE_3 = "Norwich";
-	private static final String POSTCODE = "NR4 6FS";
+	private static final String CLIENT_NAME = "Family Investments";
+	private static final String CONTACT_FIRSTNAME = "Jemimah";
+	private static final String CONTACT_SURNAME = "Dossier";
+	private static final String CONTACT_EMAIL = "jemimah.dossier@family.co.uk";
+	private static final String CONTACT_TELEPHONE = "01273 736958";
+	private static final String ADDRESS_LINE_1 = "16-17 West Street";
+	private static final String ADDRESS_LINE_2 = "Brighton";
+	private static final String ADDRESS_LINE_3 = "East Sussex";
+	private static final String POSTCODE = "BN1 2RL";
 	
 	private static final String PROJECT_NAME = "E-Commerce";
 	private static final Date PROJECT_START_DATE = new DateMidnight(2013, 1, 5).toDate();
 	private static final Date PROJECT_END_DATE = new DateMidnight(2013, 1, 5).plusMonths(3).toDate();
 	
-	private static final String EMPLOYEE_FIRSTNAME = "Kelechi";
-	private static final String EMPLOYEE_SURNAME = "Chima";
-	private static final Date EMPLOYEE_DOB = new DateMidnight(1982, 1, 5).toDate();
+	private static final String EMPLOYEE_FIRSTNAME = "Matthew";
+	private static final String EMPLOYEE_SURNAME = "Bradley";
+	private static final Date EMPLOYEE_DOB = new DateMidnight(1975, 5, 20).toDate();
 	private static final String EMPLOYEE_ADDRESS_LINE_1 = "7 Croft Road";
 	private static final String EMPLOYEE_ADDRESS_LINE_2 = "Brighton";
 	private static final String EMPLOYEE_ADDRESS_LINE_3 = "East Sussex";
 	private static final String EMPLOYEE_POSTCODE = "BN1 5JJ";
-	private static final Role EMPLOYEE_ROLE = Role.DEVELOPER;
+	private static final Role EMPLOYEE_ROLE = Role.TESTER;
 	private static final BigDecimal EMPLOYEE_RATE = new BigDecimal(45);
 	
 	private static EntityManagerFactory factory;
@@ -52,10 +52,11 @@ public class JpaTest {
 			entityManager = factory.createEntityManager();
 		
 			Long clientId = createClient();
-			Long projectId = createProject(clientId);
-			Long employeeId = createEmployee();
+			//Long projectId = createProject(clientId);
+			//Long employeeId = createEmployee();
 			
-			findClientByName();
+			findClientDetails();
+			/*findClientByName();
 			findClientByEmail();
 			findClientsWithProjects();
 			updateClientContact(clientId);
@@ -64,9 +65,9 @@ public class JpaTest {
 			findEmployeesWhoAreOverThirty();
 			findEmployeeAddressDetails();
 			
-			removeProject(projectId);
+			removeProject(projectId);*/
 			removeClient(clientId);
-			removeEmployee(employeeId);
+			//removeEmployee(employeeId);
 		} catch (Exception ex) {
 			LOG.error("Something went wrong", ex);
 			
@@ -161,6 +162,21 @@ public class JpaTest {
 		
 	  return employeeId;
   }
+	
+	private static void findClientDetails() {
+		String query = "SELECT c.id, c.name, " +
+				"c.contact.firstname, c.contact.surname, c.contact.email, c.contact.telephone, " +
+				"c.address.line1, c.address.line2, c.address.line3, c.address.line4, c.address.postcode " +
+				"FROM Client c WHERE c.name = :clientName";
+		
+		Query getClientQuery = entityManager.createQuery(query);
+    getClientQuery.setParameter("clientName", "Family Investments");
+    List<Object[]> clientDetails = getClientQuery.getResultList();
+    
+    for (Object[] details : clientDetails) {
+    	LOG.info("id={}, name={}", details[0], details[1]);
+    }
+	}
 	
 	private static void findClientByName() {
 		Query query = entityManager.createQuery("SELECT c from Client c WHERE c.name LIKE :clientName");

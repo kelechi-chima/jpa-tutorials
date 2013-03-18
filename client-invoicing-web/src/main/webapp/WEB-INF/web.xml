@@ -16,6 +16,11 @@
       <servlet-class>org.afrosoft.clientinvoicing.web.EditClientServlet</servlet-class>
     </servlet>
     
+    <servlet>
+      <servlet-name>addClientServlet</servlet-name>
+      <servlet-class>org.afrosoft.clientinvoicing.web.AddClientServlet</servlet-class>
+    </servlet>
+    
     <servlet-mapping>
       <servlet-name>clientsServlet</servlet-name>
       <url-pattern>/clients.html</url-pattern>
@@ -24,6 +29,11 @@
     <servlet-mapping>
       <servlet-name>editClientServlet</servlet-name>
       <url-pattern>/edit_client.html</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>addClientServlet</servlet-name>
+      <url-pattern>/add_client.html</url-pattern>
     </servlet-mapping>
     
     <welcome-file-list>

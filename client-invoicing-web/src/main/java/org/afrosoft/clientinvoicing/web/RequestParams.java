@@ -2,8 +2,18 @@ package org.afrosoft.clientinvoicing.web;
 
 public final class RequestParams {
 
-	public static final String ACTION_PARAM = "action";
+	public static final String ACTION = "action";
 	
-	public static final String CLIENT_ID_PARAM = "client_id";
+	public static final String CLIENT_ID = "client_id";
+	public static final String CLIENT_NAME = "client_name";
+	public static final String CONTACT_FIRST_NAME = "contact_firstname";
+	public static final String CONTACT_SURNAME = "contact_surname";
+	public static final String CONTACT_EMAIL = "contact_email";
+	public static final String CONTACT_TELEPHONE = "contact_tel";
+	public static final String CLIENT_ADDRESS_LINE1 = "address_line_1";
+	public static final String CLIENT_ADDRESS_LINE2 = "address_line_2;";
+	public static final String CLIENT_ADDRESS_LINE_3 = "address_line_3";
+	public static final String CLIENT_ADDRESS_LINE_4 = "address_line_4";
+	public static final String CLIENT_POSTCODE = "postcode";
 	
 }
