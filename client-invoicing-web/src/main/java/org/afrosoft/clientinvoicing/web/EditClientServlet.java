@@ -1,32 +1,18 @@
 package org.afrosoft.clientinvoicing.web;
 
-import static org.afrosoft.clientinvoicing.web.RequestParams.CLIENT_ADDRESS_LINE1;
-import static org.afrosoft.clientinvoicing.web.RequestParams.CLIENT_ADDRESS_LINE2;
-import static org.afrosoft.clientinvoicing.web.RequestParams.CLIENT_ADDRESS_LINE_3;
-import static org.afrosoft.clientinvoicing.web.RequestParams.CLIENT_ADDRESS_LINE_4;
-import static org.afrosoft.clientinvoicing.web.RequestParams.CLIENT_NAME;
-import static org.afrosoft.clientinvoicing.web.RequestParams.CLIENT_POSTCODE;
-import static org.afrosoft.clientinvoicing.web.RequestParams.CONTACT_EMAIL;
-import static org.afrosoft.clientinvoicing.web.RequestParams.CONTACT_FIRST_NAME;
-import static org.afrosoft.clientinvoicing.web.RequestParams.CONTACT_SURNAME;
-import static org.afrosoft.clientinvoicing.web.RequestParams.CONTACT_TELEPHONE;
-
 import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.UserTransaction;
 
-import org.afrosoft.clientinvoicing.domain.Address;
 import org.afrosoft.clientinvoicing.domain.Client;
-import org.afrosoft.clientinvoicing.domain.Contact;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;

@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="java.util.List, 
                 org.afrosoft.clientinvoicing.domain.Client,
                 org.afrosoft.clientinvoicing.web.SessionKeys" %>
@@ -11,20 +12,13 @@
   <h3>Clients</h3>
   <div>
     <table>
-    <%
-    //List<String> clientNames = (List<String>)request.getAttribute(RequestKeys.CLIENT_NAMES);
-    List<Client> clients = (List<Client>)session.getAttribute(SessionKeys.ALL_CLIENTS);
-    //for (String clientName : clientNames) {
-    	for (Client client : clients) {
-    %>
-	    <tr>
-		    <td><%=client.getName()%></td>
-		    <td><button type="button" onclick="document.location.href='edit_client.html?client_name=<%=client.getName()%>'">Edit</button></td>
-		    <td><button type="button" onclick="document.location.href='view_project.html?client_name=<%=client.getName()%>'">View Projects</button></td>
-	    </tr>
-    <%
-    }
-    %>
+      <c:forEach items="${all_clients}" var="client">
+      <tr>
+        <td><c:out value="${client.name}"/></td>
+        <td><button type="button" onclick="document.location.href='edit_client.html?client_name=<c:out value="${client.name}"/>'">Edit</button></td>
+        <td><button type="button" onclick="document.location.href='projects.html?client_name=<c:out value="${client.name}"/>'">Projects</button></td>
+      </tr>    
+      </c:forEach>
       <tr>
         <td></td>
         <td></td>

@@ -21,6 +21,11 @@
          <scope>provided</scope>
       </dependency>
       <dependency>
+        <groupId>javax.servlet.jsp.jstl</groupId>
+        <artifactId>jstl-api</artifactId>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
          <groupId>org.hibernate.javax.persistence</groupId>
          <artifactId>hibernate-jpa-2.0-api</artifactId>
          <scope>provided</scope>
@@ -33,6 +38,11 @@
       <dependency>
         <groupId>postgresql</groupId>
         <artifactId>postgresql</artifactId>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>joda-time</groupId>
+        <artifactId>joda-time</artifactId>
         <scope>provided</scope>
       </dependency>
       <dependency>
@@ -72,9 +82,10 @@
                <failOnMissingWebXml>false</failOnMissingWebXml>
                <archive>
                  <manifestEntries>
-                   <Dependencies>javaee.api, javax.persistence.api, org.postgresql, org.hibernate, org.apache.commons.lang, org.apache.commons.collections, org.slf4j, ch.qos.logback</Dependencies>
+                   <Dependencies>javaee.api, javax.persistence.api, javax.servlet.jstl.api, org.postgresql, org.hibernate, org.apache.commons.lang, org.apache.commons.collections, org.slf4j, ch.qos.logback, org.joda.time</Dependencies>
                  </manifestEntries>
                </archive>
+               <packagingExcludes>WEB-INF/*.tld</packagingExcludes>
             </configuration>
          </plugin>
       </plugins>

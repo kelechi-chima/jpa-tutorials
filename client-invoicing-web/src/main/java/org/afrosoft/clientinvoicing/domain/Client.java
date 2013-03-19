@@ -2,6 +2,7 @@ package org.afrosoft.clientinvoicing.domain;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -29,7 +30,7 @@ public class Client {
 	@Embedded
 	private Address address;
 	
-	@OneToMany(mappedBy="client")
+	@OneToMany(mappedBy="client", cascade={CascadeType.MERGE})
 	private Set<Project> projects;
 	
 	public String getName() {

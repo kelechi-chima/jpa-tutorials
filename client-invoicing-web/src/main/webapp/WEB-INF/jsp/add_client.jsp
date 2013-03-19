@@ -52,8 +52,8 @@
       <tr>
         <td></td>
         <td>
-	        <input type="button" value="Cancel" onclick="document.location.href='clients.html'"/>
-	        <input type="button" value="Add Client" onclick="document.forms[0].submit()"/>
+	        <input type="button" value="Back" onclick="document.location.href='clients.html'"/>
+	        <input type="submit" value="Save"/>
         </td>
       </tr>
     </table>
