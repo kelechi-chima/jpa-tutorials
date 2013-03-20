@@ -2,15 +2,21 @@ package org.afrosoft.clientinvoicing.domain;
 
 import java.util.Set;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+@NamedQuery(name="findAllClients",
+						query="SELECT c FROM Client c")
 @Entity
 public class Client {
 
@@ -24,12 +30,18 @@ public class Client {
 	private String name;
 	
 	@Embedded
+	@AttributeOverrides({
+		@AttributeOverride(name="firstname", column=@Column(name="contact_first_name")),
+		@AttributeOverride(name="surname", column=@Column(name="contact_last_name")),
+		@AttributeOverride(name="email", column=@Column(name="contact_email")),
+		@AttributeOverride(name="telephone", column=@Column(name="contact_telephone"))
+	})
 	private Contact contact;
 	
 	@Embedded
 	private Address address;
 	
-	@OneToMany(mappedBy="client")
+	@OneToMany(mappedBy="client", cascade={CascadeType.MERGE})
 	private Set<Project> projects;
 	
 	public String getName() {

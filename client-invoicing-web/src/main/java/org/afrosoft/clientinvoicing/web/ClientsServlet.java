@@ -35,11 +35,9 @@ public class ClientsServlet extends HttpServlet {
 		if (StringUtils.isNotBlank(req.getParameter(ACTION))) {
 			doAction(req.getParameter(ACTION), req, resp);
 		} else {
-			String query = "SELECT c FROM Client c";
+			List<Client> clients = entityManager.createNamedQuery("findAllClients", Client.class).getResultList();
       
-      List<Client> clients = entityManager.createQuery(query, Client.class).getResultList();
-      
-      LOG.info("Fetched client names, number of rows: {}", clients.size());
+      LOG.info("Fetched {} clients", clients.size());
       
       req.getSession().setAttribute(SessionKeys.ALL_CLIENTS, clients);
 			req.getRequestDispatcher("/WEB-INF/jsp/clients.jsp").forward(req, resp);

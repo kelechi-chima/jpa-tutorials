@@ -11,11 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+@NamedQuery(name="findProjectsByClientName", 
+						query="SELECT p FROM Client c JOIN c.projects p WHERE c.name = :clientName")
 @Entity
 public class Project {
 

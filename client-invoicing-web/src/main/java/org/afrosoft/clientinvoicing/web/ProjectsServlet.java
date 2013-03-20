@@ -40,14 +40,12 @@ public class ProjectsServlet extends HttpServlet {
 			return;
 		}
 
-		String query = "SELECT p FROM Client c JOIN c.projects p WHERE c.name = :clientName";
-
-		List<Project> projects = entityManager.createQuery(query, Project.class).
-				setParameter("clientName", currentClient.getName()).
-				getResultList();
+		List<Project> projects = entityManager.createNamedQuery("findProjectsByClientName", Project.class)
+				.setParameter("clientName", currentClient.getName())
+				.getResultList();
 
 		if (CollectionUtils.isNotEmpty(projects)) {
-			LOG.info("Fetched client projects, number: {}", projects.size());
+			LOG.info("Fetched {} client projects", projects.size());
 
 			req.getSession().setAttribute(SessionKeys.CLIENT_PROJECTS, projects);
 		}

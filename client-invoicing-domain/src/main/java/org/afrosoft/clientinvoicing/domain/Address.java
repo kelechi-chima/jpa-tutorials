@@ -1,8 +1,18 @@
 package org.afrosoft.clientinvoicing.domain;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
+@AttributeOverrides({
+	@AttributeOverride(name="line1", column=@Column(name="address_line_1")),
+	@AttributeOverride(name="line2", column=@Column(name="address_line_2")),
+	@AttributeOverride(name="line3", column=@Column(name="address_line_3")),
+	@AttributeOverride(name="line4", column=@Column(name="address_line_4")),
+	@AttributeOverride(name="postcode", column=@Column(name="address_postcode"))
+})
 public class Address {
 
 	private String line1;
