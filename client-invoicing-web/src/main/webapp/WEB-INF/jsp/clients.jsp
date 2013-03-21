@@ -11,7 +11,7 @@
 <body>
   <h3>Clients</h3>
   <div>
-    <table>
+    <table border="1">
       <c:forEach items="${all_clients}" var="client">
       <tr>
         <td><c:out value="${client.name}"/></td>

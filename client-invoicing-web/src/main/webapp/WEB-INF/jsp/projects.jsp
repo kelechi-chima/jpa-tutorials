@@ -13,7 +13,7 @@
 <body>
   <h3><c:out value="${currentClient.name}"/> Projects</h3>
   <div>
-	  <table>
+	  <table border="1">
       <thead>
         <tr>
           <th>Project</th><th>Start Date</th><th>End Date</th>
