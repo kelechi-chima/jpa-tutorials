@@ -2,34 +2,39 @@ package org.afrosoft.clientinvoicing.service;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
-
 import org.afrosoft.clientinvoicing.domain.Client;
-import org.springframework.transaction.annotation.Transactional;
+import org.afrosoft.clientinvoicing.repository.ClientRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service("clientService")
 public class ClientServiceImpl implements ClientService {
   
-  @PersistenceContext(unitName="client-invoicing", type=PersistenceContextType.TRANSACTION)
-  private EntityManager entityManager;
+  private ClientRepository clientRepository;
 
-  @Transactional
+  @Autowired
+  public ClientServiceImpl(ClientRepository clientRepository) {
+    this.clientRepository = clientRepository;
+  }
+
   @Override
   public List<Client> getAllClients() {
-  	// TODO move this to a DAO layer
-    List<Client> clients = entityManager.createNamedQuery("findAllClients", Client.class).getResultList();
+    List<Client> clients = clientRepository.getAllClients();
     
     return clients;
   }
 
 	@Override
-  public void addClient(Client client) {
+  public Client addClient(Client client) {
+	  clientRepository.addClient(client);
+	  
+	  return client;
   }
 
 	@Override
   public Client updateClient(Client client) {
-	  return null;
+	  client = clientRepository.updateClient(client);
+	  return client;
   }
 
 }

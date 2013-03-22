@@ -19,55 +19,49 @@
     <servlet-name>clientRequestHandler</servlet-name>
     <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
   </servlet>
-    
-  <!-- <servlet>
-    <servlet-name>clientsServlet</servlet-name>
-    <servlet-class>org.afrosoft.clientinvoicing.web.ClientsServlet</servlet-class>
-  </servlet> -->
   
   <servlet>
-    <servlet-name>editClientServlet</servlet-name>
-    <servlet-class>org.afrosoft.clientinvoicing.web.EditClientServlet</servlet-class>
+    <servlet-name>editClientRequestHandler</servlet-name>
+    <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>addClientRequestHandler</servlet-name>
+    <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
   </servlet>
   
   <servlet>
-    <servlet-name>addClientServlet</servlet-name>
-    <servlet-class>org.afrosoft.clientinvoicing.web.AddClientServlet</servlet-class>
+    <servlet-name>projectRequestHandler</servlet-name>
+    <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
   </servlet>
   
   <servlet>
-    <servlet-name>projectsServlet</servlet-name>
-    <servlet-class>org.afrosoft.clientinvoicing.web.ProjectsServlet</servlet-class>
-  </servlet>
-  
-  <servlet>
-    <servlet-name>addProjectServlet</servlet-name>
-    <servlet-class>org.afrosoft.clientinvoicing.web.AddProjectServlet</servlet-class>
+    <servlet-name>addProjectRequestHandler</servlet-name>
+    <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>
-    <!-- <servlet-name>clientsServlet</servlet-name> -->
     <servlet-name>clientRequestHandler</servlet-name>
     <url-pattern>/clients.html</url-pattern>
   </servlet-mapping>
   
   <servlet-mapping>
-    <servlet-name>editClientServlet</servlet-name>
+    <servlet-name>editClientRequestHandler</servlet-name>
     <url-pattern>/edit_client.html</url-pattern>
   </servlet-mapping>
   
   <servlet-mapping>
-    <servlet-name>addClientServlet</servlet-name>
+    <servlet-name>addClientRequestHandler</servlet-name>
     <url-pattern>/add_client.html</url-pattern>
   </servlet-mapping>
   
   <servlet-mapping>
-    <servlet-name>projectsServlet</servlet-name>
+    <servlet-name>projectRequestHandler</servlet-name>
     <url-pattern>/projects.html</url-pattern>
   </servlet-mapping>
   
   <servlet-mapping>
-    <servlet-name>addProjectServlet</servlet-name>
+    <servlet-name>addProjectRequestHandler</servlet-name>
     <url-pattern>/add_project.html</url-pattern>
   </servlet-mapping>
   

@@ -27,6 +27,7 @@
 
   <modules>
     <module>../client-invoicing-domain</module>
+    <module>../client-invoicing-repository</module>
     <module>../client-invoicing-service</module>
     <module>../client-invoicing-web</module>
   </modules>
@@ -90,6 +91,22 @@
         <groupId>org.springframework</groupId>
         <artifactId>spring-orm</artifactId>
         <version>${springframework.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-test</artifactId>
+        <version>${springframework.version}</version>
+        <scope>test</scope>
         <exclusions>
           <exclusion>
             <groupId>commons-logging</groupId>

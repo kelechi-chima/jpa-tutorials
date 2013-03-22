@@ -15,9 +15,12 @@ import org.afrosoft.clientinvoicing.service.ClientService;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
+import org.springframework.stereotype.Component;
 import org.springframework.web.HttpRequestHandler;
 
+@Component("clientRequestHandler")
 public class ClientRequestHandler implements HttpRequestHandler {
 
   private static final Logger LOG = LoggerFactory.getLogger(ClientRequestHandler.class);
@@ -27,6 +30,7 @@ public class ClientRequestHandler implements HttpRequestHandler {
   
   private ClientService clientService;
   
+  @Autowired
   public void setClientService(ClientService clientService) {
     this.clientService = clientService;
   }
@@ -44,6 +48,10 @@ public class ClientRequestHandler implements HttpRequestHandler {
         request.getSession().setAttribute(SessionKeys.ALL_CLIENTS, clients);
         request.getRequestDispatcher("/WEB-INF/jsp/clients.jsp").forward(request, response);
       } 
+    } else {
+      String httpMethod = request.getMethod();
+      LOG.error("/clients.html called with unsupported http method '{}'", httpMethod);
+      throw new ServletException("HTTP method not supported: " + httpMethod);
     }
   }
   
