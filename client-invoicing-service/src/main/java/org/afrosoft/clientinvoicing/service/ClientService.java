@@ -8,5 +8,8 @@ public interface ClientService {
 
   List<Client> getAllClients();
   
+  void addClient(Client client);
+  
+  Client updateClient(Client client);
   
 }
