@@ -149,11 +149,6 @@
         <version>${jodatime.version}</version>
       </dependency>
       <dependency>
-        <groupId>postgresql</groupId>
-        <artifactId>postgresql</artifactId>
-        <version>${postresql.driver.version}</version>
-      </dependency>
-      <dependency>
          <groupId>javax.servlet</groupId>
          <artifactId>javax.servlet-api</artifactId>
          <version>${servlet.api.version}</version>
