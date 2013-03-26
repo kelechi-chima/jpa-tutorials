@@ -5,7 +5,8 @@
   
   <persistence-unit name="client-invoicing" transaction-type="JTA">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
-    <jta-data-source>java:/ClientInvoicingDS</jta-data-source>
+    <!-- Supplied by Spring. Enables easy substitution for test purposes. -->
+    <!-- <jta-data-source>java:/ClientInvoicingDS</jta-data-source> -->
     
     <class>org.afrosoft.clientinvoicing.domain.Contact</class>
     <class>org.afrosoft.clientinvoicing.domain.Address</class>
@@ -18,7 +19,6 @@
     
     <properties>
       <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
-      <property name="hibernate.hbm2ddl.auto" value="update"/>
       <property name="hibernate.show_sql" value="true"/>
       <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform"/>
     </properties>

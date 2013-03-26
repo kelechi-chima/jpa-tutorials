@@ -2,13 +2,37 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
-	                    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
 
   <import resource="classpath:client-invoicing-repository-config.xml"/>
 
   <context:annotation-config/>
   
   <context:component-scan base-package="org.afrosoft.clientinvoicing.service"/>
+  
+  <!-- Not using JpaTransactionManager as the persistence unit is of 'JTA' transaction type. 
+       An instance of JpaTransactionManager leads to an entityManager.beginTransaction() call
+       which throws an exception: 'A JTa entity manager cannot call beginTransaction()' 
+  -->
+  <!-- <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+    <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    <property name="jpaDialect" ref="jpaDialect"/>
+    <property name="dataSource" ref="clientInvoicingDS"/>
+  </bean> -->
+  
+  <tx:annotation-driven transaction-manager="transactionManager"/>
+  
+  <!-- Commented out in order to override default jndi locations below. JBoss AS7 changed standard locations. -->
+  <!-- <tx:jta-transaction-manager /> -->
+  
+  <bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager">
+    <property name="userTransactionName" value="java:jboss/UserTransaction"/>
+    <property name="autodetectUserTransaction" value="false"/>
+    <property name="transactionManagerName" value="java:jboss/TransactionManager"/>
+    <property name="autodetectTransactionManager" value="false"/>
+  </bean>
   
 </beans>

@@ -25,7 +25,7 @@
   <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
     <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"/>
     <property name="persistenceUnitName" value="client-invoicing"/>
-    <property name="jtaDataSource" ref="clientInvoicingDS"/>
+    <property name="dataSource" ref="clientInvoicingDS"/>
     <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
   </bean>
 
@@ -35,28 +35,17 @@
     <property name="showSql" value="true"/>
   </bean>
 
-  <jee:jndi-lookup jndi-name="java:/ClientInvoicingDS" id="clientInvoicingDS"/>
+  <beans profile="production">
+    <jee:jndi-lookup jndi-name="java:/ClientInvoicingDS" id="clientInvoicingDS"/>
+  </beans>
   
-  <!-- Not using JpaTransactionManager as the persistence unit is of 'JTA' transaction type. 
-       An instance of JpaTransactionManager leads to an entityManager.beginTransaction() call
-       which throws an exception: 'A JTa entity manager cannot call beginTransaction()' 
-  -->
-  <!-- <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-    <property name="entityManagerFactory" ref="entityManagerFactory"/>
-    <property name="jpaDialect" ref="jpaDialect"/>
-    <property name="dataSource" ref="clientInvoicingDS"/>
-  </bean> -->
-  
-  <tx:annotation-driven transaction-manager="transactionManager"/>
-  
-  <!-- Commented out in order to override default jndi locations below. JBoss AS7 changed standard locations. -->
-  <!-- <tx:jta-transaction-manager /> -->
-  
-  <bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager">
-    <property name="userTransactionName" value="java:jboss/UserTransaction"/>
-    <property name="autodetectUserTransaction" value="false"/>
-    <property name="transactionManagerName" value="java:jboss/TransactionManager"/>
-    <property name="autodetectTransactionManager" value="false"/>
-  </bean>
+  <beans profile="dev">
+    <bean id="clientInvoicingDS" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+      <property name="driverClassName" value="org.postgresql.Driver"/>
+      <property name="url" value="jdbc:postgresql://localhost/clientinvoicingdev"/>
+      <property name="username" value="kelechi"/>
+      <property name="password" value="owerri82"/>
+    </bean>
+  </beans>
   
 </beans>
