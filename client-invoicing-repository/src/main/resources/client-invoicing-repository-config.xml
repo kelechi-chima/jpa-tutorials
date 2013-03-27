@@ -20,13 +20,16 @@
   <!-- Translates native resource exceptions to Spring DataAccessException -->
   <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
   
-  <bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
-
   <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-    <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"/>
     <property name="persistenceUnitName" value="client-invoicing"/>
     <property name="dataSource" ref="clientInvoicingDS"/>
     <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
+    <property name="packagesToScan" value="org.afrosoft.clientinvoicing.domain"/>
+    <property name="jpaProperties">
+      <props>
+        <prop key="hibernate.hbm2ddl.auto">update</prop>
+      </props>
+    </property>
   </bean>
 
   <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
@@ -35,6 +38,16 @@
     <property name="showSql" value="true"/>
   </bean>
 
+  <bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
+
+  <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+    <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    <property name="jpaDialect" ref="jpaDialect"/>
+    <property name="dataSource" ref="clientInvoicingDS"/>
+  </bean>
+  
+  <tx:annotation-driven transaction-manager="transactionManager"/>
+  
   <beans profile="production">
     <jee:jndi-lookup jndi-name="java:/ClientInvoicingDS" id="clientInvoicingDS"/>
   </beans>
@@ -46,6 +59,6 @@
       <property name="username" value="kelechi"/>
       <property name="password" value="owerri82"/>
     </bean>
-  </beans>
+  </beans>  
   
 </beans>

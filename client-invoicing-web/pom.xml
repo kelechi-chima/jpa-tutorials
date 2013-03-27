@@ -96,7 +96,7 @@
               <failOnMissingWebXml>false</failOnMissingWebXml>
               <archive>
                 <manifestEntries>
-                  <Dependencies>javaee.api, javax.persistence.api, javax.servlet.jstl.api, org.postgresql, org.hibernate, org.apache.commons.lang, org.apache.commons.collections, org.slf4j, org.slf4j.jcl-over-slf4j, ch.qos.logback, org.joda.time</Dependencies>
+                  <Dependencies>javaee.api, javax.persistence.api, javax.servlet.jstl.api, org.postgresql, org.hibernate, org.hibernate.envers, org.apache.commons.lang, org.apache.commons.collections, org.slf4j, org.slf4j.jcl-over-slf4j, ch.qos.logback, org.joda.time</Dependencies>
                 </manifestEntries>
               </archive>
               <packagingExcludes>WEB-INF/*.tld</packagingExcludes>

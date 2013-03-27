@@ -1,0 +1,1 @@
+INSERT INTO client (client_id, client_name, address_line_1, address_line_2, address_line_3, address_line_4, address_postcode, contact_first_name, contact_last_name, contact_email, contact_telephone) values(1, 'Fictional Client', 'Client House', '30 Client Road', 'Client city', 'Client County', 'Client Postcode', 'Joe', 'Bloggs', 'joe.bloggs@fictionalclient.com', '020 123456789');

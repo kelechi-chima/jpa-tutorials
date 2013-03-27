@@ -10,7 +10,6 @@ import org.afrosoft.clientinvoicing.domain.Client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 @Repository("clientRepository")
 public class ClientRepositoryImpl implements ClientRepository {
@@ -20,7 +19,6 @@ public class ClientRepositoryImpl implements ClientRepository {
   @PersistenceContext(unitName="client-invoicing", type=PersistenceContextType.TRANSACTION)
   private EntityManager entityManager;
   
-  @Transactional(readOnly=true)
   @Override
   public List<Client> getAllClients() {
     List<Client> clients = entityManager.createNamedQuery("findAllClients", Client.class).getResultList();
@@ -30,7 +28,6 @@ public class ClientRepositoryImpl implements ClientRepository {
     return clients;
   }
 
-  @Transactional
   @Override
   public Client addClient(Client client) {
     entityManager.persist(client);
@@ -40,7 +37,6 @@ public class ClientRepositoryImpl implements ClientRepository {
     return client;
   }
 
-  @Transactional
   @Override
   public Client updateClient(Client client) {
     client = entityManager.merge(client);
@@ -50,10 +46,11 @@ public class ClientRepositoryImpl implements ClientRepository {
     return client;
   }
 
-  @Transactional
   @Override
   public void removeClient(Client client) {
-    // TODO - may need to remove projects first as remove is not cascaded
+    entityManager.remove(client);
+    
+    LOG.info("Removed client: {}", client);
   }
 
 }

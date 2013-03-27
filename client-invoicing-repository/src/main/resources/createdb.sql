@@ -1,3 +1,9 @@
+DROP TABLE IF EXISTS timesheet;
+DROP TABLE IF EXISTS emp_proj;
+DROP TABLE IF EXISTS project;
+DROP TABLE IF EXISTS employee;
+DROP TABLE IF EXISTS client;
+
 CREATE TABLE client
 (
   client_id bigint NOT NULL,
@@ -7,10 +13,10 @@ CREATE TABLE client
   address_line_2 character varying(255),
   address_line_3 character varying(255),
   address_line_4 character varying(255),
-  contact_email character varying(255),
+  contact_first_name character varying(255),
   contact_last_name character varying(255),
+  contact_email character varying(255),
   contact_telephone character varying(255),
-  firstname character varying(255),
   CONSTRAINT client_pkey PRIMARY KEY (client_id )
 );
 
@@ -19,8 +25,8 @@ CREATE TABLE employee
   employee_id bigint NOT NULL,
   dob date,
   first_name character varying(255),
-  role character varying(255),
   last_name character varying(255),
+  role character varying(255),
   postcode character varying(255),
   address_line_1 character varying(255),
   address_line_2 character varying(255),
@@ -33,9 +39,9 @@ CREATE TABLE employee
 CREATE TABLE project
 (
   project_id bigint NOT NULL,
-  enddate date,
   project_name character varying(255),
   startdate date,
+  enddate date,
   client_id bigint,
   CONSTRAINT project_pkey PRIMARY KEY (project_id ),
   CONSTRAINT fk_project_client_id FOREIGN KEY (client_id)
