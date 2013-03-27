@@ -82,9 +82,9 @@ public class EditClientRequestHandler implements HttpRequestHandler {
       LOG.info("No current client in session");
       resp.sendRedirect("clients.html");
     } else {
-      ClientParamBuilder.buildClient(client, req);
+      RequestParamUtils.buildClient(client, req);
       
-      LOG.info("About to update client details");
+      LOG.info("About to update client");
       try {
         client = clientService.updateClient(client);
         
@@ -93,7 +93,7 @@ public class EditClientRequestHandler implements HttpRequestHandler {
         req.setAttribute(RequestKeys.EDIT_CLIENT_RESULT, "Changes have been applied successfully");
         req.getRequestDispatcher("/WEB-INF/jsp/edit_client.jsp").forward(req, resp);
       } catch (Exception ex) {
-        LOG.error("Something went wrong while updating client details", ex);
+        LOG.error("Something went wrong while updating client", ex);
         throw new ServletException(ex);
       } 
     }

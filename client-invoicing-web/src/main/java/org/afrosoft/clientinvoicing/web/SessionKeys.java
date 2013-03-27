@@ -6,5 +6,6 @@ public final class SessionKeys {
 	public static final String CLIENT_ID = "clientId";
 	public static final String CURRENT_CLIENT = "currentClient";
 	public static final String CLIENT_PROJECTS = "clientProjects";
+	public static final String CURRENT_PROJECT = "currentProject";
 	
 }

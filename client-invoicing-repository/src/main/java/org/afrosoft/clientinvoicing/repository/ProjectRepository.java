@@ -13,6 +13,8 @@ public interface ProjectRepository {
   
   List<Project> findByClientName(String clientName);
   
+  Project findByProjectName(String projectName);
+  
   void removeProject(Project project);
   
 }

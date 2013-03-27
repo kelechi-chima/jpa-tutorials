@@ -49,7 +49,7 @@ public class AddClientRequestHandler implements HttpRequestHandler {
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
       IOException {
     Client client = new Client();
-    ClientParamBuilder.buildClient(client, request);
+    RequestParamUtils.buildClient(client, request);
     
     LOG.info("About to persist new client");
     try {

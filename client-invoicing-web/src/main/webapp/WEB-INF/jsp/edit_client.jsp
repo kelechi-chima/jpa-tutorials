@@ -1,8 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="true" import="org.afrosoft.clientinvoicing.domain.Client, 
-                                org.afrosoft.clientinvoicing.web.SessionKeys,
-                                org.afrosoft.clientinvoicing.web.RequestKeys,
-                                org.apache.commons.lang.StringUtils" %>
 <!doctype html>
 <html lang="en">
 <head>

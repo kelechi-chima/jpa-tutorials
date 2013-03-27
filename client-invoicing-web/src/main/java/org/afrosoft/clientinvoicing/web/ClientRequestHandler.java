@@ -43,7 +43,7 @@ public class ClientRequestHandler implements HttpRequestHandler {
       } else {
         List<Client> clients = clientService.getAllClients();
         
-        LOG.info("Fetched {} clients", clients.size());
+        LOG.info("Number of clients found: {}", clients.size());
         
         request.getSession().setAttribute(SessionKeys.ALL_CLIENTS, clients);
         request.getRequestDispatcher("/WEB-INF/jsp/clients.jsp").forward(request, response);

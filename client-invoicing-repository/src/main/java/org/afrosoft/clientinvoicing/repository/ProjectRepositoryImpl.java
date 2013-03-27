@@ -11,7 +11,6 @@ import org.afrosoft.clientinvoicing.domain.Project;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 @Repository("projectRepository")
 public class ProjectRepositoryImpl implements ProjectRepository {
@@ -21,7 +20,6 @@ public class ProjectRepositoryImpl implements ProjectRepository {
   @PersistenceContext(unitName="client-invoicing", type=PersistenceContextType.TRANSACTION)
   private EntityManager entityManager;
   
-  @Transactional
   @Override
   public Project addProject(Project project, Client client) {
     Client currentClient = entityManager.merge(client);
@@ -34,7 +32,6 @@ public class ProjectRepositoryImpl implements ProjectRepository {
     return project;
   }
 
-  @Transactional
   @Override
   public Project updateProject(Project project) {
     project = entityManager.merge(project);
@@ -44,7 +41,6 @@ public class ProjectRepositoryImpl implements ProjectRepository {
     return project;
   }
   
-  @Transactional(readOnly=true)
   @Override
   public List<Project> findByClientName(String clientName) {
     List<Project> projects = entityManager.createNamedQuery("findProjectsByClientName", Project.class)
@@ -56,10 +52,18 @@ public class ProjectRepositoryImpl implements ProjectRepository {
     return projects;
   }
 
-  @Transactional
+  @Override
+  public Project findByProjectName(String projectName) {
+  	Project project = entityManager.createNamedQuery("findProjectByProjectName", Project.class)
+  			.setParameter("projectName", projectName)
+  			.getSingleResult();
+  		
+	  return project;
+  }
+
   @Override
   public void removeProject(Project project) {
-    // TODO - may need to remove timesheets first as remove is not cascaded
+    entityManager.remove(project);
   }
 
 }

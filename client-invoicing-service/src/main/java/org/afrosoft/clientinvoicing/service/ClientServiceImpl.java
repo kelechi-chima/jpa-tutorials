@@ -18,7 +18,7 @@ public class ClientServiceImpl implements ClientService {
     this.clientRepository = clientRepository;
   }
 
-  @Transactional(readOnly=true)
+  @Transactional(readOnly = true)
   @Override
   public List<Client> getAllClients() {
     List<Client> clients = clientRepository.getAllClients();

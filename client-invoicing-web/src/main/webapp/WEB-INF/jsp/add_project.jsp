@@ -24,7 +24,7 @@
 	    <tr>
 	    <td></td>
 	    <td>
-		    <input type="button" value="Back" onclick="window.history.back()"/>
+		    <input type="button" value="Back" onclick="document.location.href='projects.html"/>
 		    <input type="submit" value="Save"/>
 	    </td>
 	    </tr>

@@ -25,7 +25,7 @@
 	      <td><c:out value="${project.name}"/></td>
 	      <td><c:out value="${project.startDate}"/></td>
 	      <td><c:out value="${project.endDate}"/></td>
-	      <td></td>
+	      <td><button type="button" onclick="document.location.href='edit_project.html?project_name=<c:out value="${project.name}"/>'">Edit</button></td>
       </tr>
       </c:forEach>
       </c:if>

@@ -44,26 +44,23 @@ public class ProjectRequestHandler implements HttpRequestHandler {
     }
   }
 
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    String clientName = (String) req.getParameter(RequestParams.CLIENT_NAME);
+    String clientName = (String) request.getParameter(RequestParams.CLIENT_NAME);
     
-    Client currentClient = getCurrentClient(clientName, req.getSession());
+    Client currentClient = getCurrentClient(clientName, request.getSession());
 
     if (currentClient == null) {
-      resp.sendRedirect("clients.html");
+      response.sendRedirect("clients.html");
       return;
     }
 
-    List<Project> projects = projectService.findByClient(currentClient);
+    List<Project> projects = projectService.findByClientName(currentClient);
 
-    if (CollectionUtils.isNotEmpty(projects)) {
-      LOG.info("Fetched {} client projects", projects.size());
+    LOG.info("Number of client projects found: {}", projects.size());
 
-      req.getSession().setAttribute(SessionKeys.CLIENT_PROJECTS, projects);
-    }
-
-    req.getRequestDispatcher("WEB-INF/jsp/projects.jsp").forward(req, resp);
+    request.getSession().setAttribute(SessionKeys.CLIENT_PROJECTS, projects);
+    request.getRequestDispatcher("WEB-INF/jsp/projects.jsp").forward(request, response);
   }
 
   private Client getCurrentClient(final String clientName, final HttpSession session) {

@@ -11,7 +11,9 @@ Project addProject(Project project, Client client);
   
   Project updateProject(Project project);
   
-  List<Project> findByClient(Client client);
+  List<Project> findByClientName(Client client);
+  
+  Project findByName(String projectName);
   
   void removeProject(Project project);
   

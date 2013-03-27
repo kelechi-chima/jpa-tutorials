@@ -44,6 +44,11 @@
     <servlet-name>addProjectRequestHandler</servlet-name>
     <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
   </servlet>
+
+  <servlet>
+    <servlet-name>editProjectRequestHandler</servlet-name>
+    <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+  </servlet>
   
   <servlet-mapping>
     <servlet-name>clientRequestHandler</servlet-name>
@@ -68,6 +73,11 @@
   <servlet-mapping>
     <servlet-name>addProjectRequestHandler</servlet-name>
     <url-pattern>/add_project.html</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>editProjectRequestHandler</servlet-name>
+    <url-pattern>/edit_project.html</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>
