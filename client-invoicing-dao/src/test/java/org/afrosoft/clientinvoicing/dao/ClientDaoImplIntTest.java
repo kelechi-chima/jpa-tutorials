@@ -1,4 +1,4 @@
-package org.afrosoft.clientinvoicing.repository;
+package org.afrosoft.clientinvoicing.dao;
 
 import static org.junit.Assert.*;
 
@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 
+import org.afrosoft.clientinvoicing.dao.ClientDao;
 import org.afrosoft.clientinvoicing.domain.Address;
 import org.afrosoft.clientinvoicing.domain.Client;
 import org.afrosoft.clientinvoicing.domain.Contact;
@@ -27,13 +28,13 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfig.class)
 @ActiveProfiles("dev")
-public class ClientRepositoryImplIntTest {
+public class ClientDaoImplIntTest {
 
 	/** ID defined in insert-test-data.sql */
 	private static final Long TEST_CLIENT_ID = 1L;
 	
 	@Autowired
-	private ClientRepository clientRepository;
+	private ClientDao clientDao;
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -59,14 +60,14 @@ public class ClientRepositoryImplIntTest {
 	
 	@Test
 	public void getAllClients() {
-		List<Client> clients = clientRepository.getAllClients();
+		List<Client> clients = clientDao.getAllClients();
 		assertEquals(1, clients.size());
 	}
 	
 	@Transactional
 	@Test
 	public void addClient() {
-		clientRepository.addClient(client());
+		clientDao.addClient(client());
 		entityManager.flush();
 		assertEquals(2, JdbcTestUtils.countRowsInTable(jdbcTemplate, "client"));
 	}
@@ -79,13 +80,13 @@ public class ClientRepositoryImplIntTest {
 		int rowCount = JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, "client", whereCondition);
 		assertEquals(0, rowCount);
 		
-		Client client = clientRepository.addClient(client());
+		Client client = clientDao.addClient(client());
 		entityManager.flush();
 		
-		client.getContact().setFirstname("John");
-		client.getContact().setSurname("Doe");
+		client.getContact().setFirstName("John");
+		client.getContact().setLastName("Doe");
 		
-		clientRepository.updateClient(client);
+		clientDao.updateClient(client);
 		entityManager.flush();
 		
 		rowCount = JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, "client", whereCondition);
@@ -98,7 +99,7 @@ public class ClientRepositoryImplIntTest {
 		Client client = entityManager.find(Client.class, TEST_CLIENT_ID);
 		assertNotNull(client);
 		
-		clientRepository.removeClient(client);
+		clientDao.removeClient(client);
 		entityManager.flush();
 		
 		assertEquals(0, JdbcTestUtils.countRowsInTable(jdbcTemplate, "client"));
@@ -114,8 +115,8 @@ public class ClientRepositoryImplIntTest {
 	
 	private Contact contact() {
 		Contact contact = new Contact();
-		contact.setFirstname("Jane");
-		contact.setSurname("Doe");
+		contact.setFirstName("Jane");
+		contact.setLastName("Doe");
 		contact.setEmail("jane.doe@anotherfictionalclient.com");
 		contact.setTelephone("019875425892");
 		return contact;

@@ -15,11 +15,26 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+@NamedQueries({
+	@NamedQuery(name = "findEmployeeByNationalInsuranceNo", 
+			query = "SELECT e FROM Employee e WHERE e.nationalInsuranceNo = :nationalInsuranceNo"),
+			
+	@NamedQuery(name = "findEmployeesByFirstName", 
+			query = "SELECT e FROM Employee e WHERE e.firstName LIKE :firstName"),
+			
+	@NamedQuery(name = "findEmployeesByLastName", 
+			query = "SELECT e FROM Employee e WHERE e.lastName LIKE :lastName"),
+			
+	@NamedQuery(name = "findEmployeesByRole", 
+			query = "SELECT e FROM Employee e WHERE e.role = :employeeRole")
+})
 @Entity
 public class Employee {
 
@@ -29,11 +44,14 @@ public class Employee {
 	@Column(name="EMPLOYEE_ID")
 	private Long id;
 	
+	@Column(name="NATIONAL_INSURANCE_NO")
+	private String nationalInsuranceNo;
+	
 	@Column(name="FIRST_NAME")
-	private String firstname;
+	private String firstName;
 	
 	@Column(name="LAST_NAME")
-	private String surname;
+	private String lastName;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name="DOB")
@@ -63,21 +81,29 @@ public class Employee {
 	protected void setId(Long id) {
 		this.id = id;
 	}
-
-	public String getFirstname() {
-		return firstname;
+	
+	public String getNationalInsuranceNo() {
+		return nationalInsuranceNo;
 	}
 
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+	public void setNationalInsuranceNo(String nationalInsuranceNo) {
+		this.nationalInsuranceNo = nationalInsuranceNo;
 	}
 
-	public String getSurname() {
-		return surname;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setSurname(String surname) {
-		this.surname = surname;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public Date getDateOfBirth() {
@@ -132,8 +158,8 @@ public class Employee {
   public String toString() {
 	  return new StringBuilder().
 	  		append("Employee[id=").append(id).
-	  		append(", firstname=").append(firstname).
-	  		append(", surname=").append(surname).
+	  		append(", first name=").append(firstName).
+	  		append(", last name=").append(lastName).
 	  		append(", dob=").append(dateOfBirth).
 	  		append(", role=").append(role).
 	  		append(", rate=").append(rate).

@@ -9,11 +9,7 @@
 
   <context:annotation-config/>
   
-  <context:component-scan base-package="org.afrosoft.clientinvoicing.repository"/>
-  
-  <bean id="clientRepository" class="org.afrosoft.clientinvoicing.repository.ClientRepositoryImpl"/>
-  
-  <bean id="projectRepository" class="org.afrosoft.clientinvoicing.repository.ProjectRepositoryImpl"/>
+  <context:component-scan base-package="org.afrosoft.clientinvoicing.dao"/>
 
   <!-- Translates native resource exceptions to Spring DataAccessException -->
   <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
@@ -43,8 +39,6 @@
     <property name="jpaDialect" ref="jpaDialect"/>
     <property name="dataSource" ref="clientInvoicingDS"/>
   </bean>
-  
-  <!-- <tx:annotation-driven transaction-manager="transactionManager"/> -->
   
   <beans profile="production">
     <jee:jndi-lookup jndi-name="java:/ClientInvoicingDS" id="clientInvoicingDS"/>

@@ -10,10 +10,10 @@
   </parent>
   
   <groupId>org.afrosoft</groupId>
-  <artifactId>client-invoicing-repository</artifactId>
+  <artifactId>client-invoicing-dao</artifactId>
   <packaging>jar</packaging>
 
-  <name>client-invoicing-repository</name>
+  <name>client-invoicing-dao</name>
 
   <dependencies>
     <dependency>

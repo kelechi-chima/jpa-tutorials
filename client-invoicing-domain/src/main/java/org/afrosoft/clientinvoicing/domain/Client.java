@@ -31,8 +31,8 @@ public class Client {
 	
 	@Embedded
 	@AttributeOverrides({
-		@AttributeOverride(name="firstname", column=@Column(name="contact_first_name")),
-		@AttributeOverride(name="surname", column=@Column(name="contact_last_name")),
+		@AttributeOverride(name="firstName", column=@Column(name="contact_first_name")),
+		@AttributeOverride(name="lastName", column=@Column(name="contact_last_name")),
 		@AttributeOverride(name="email", column=@Column(name="contact_email")),
 		@AttributeOverride(name="telephone", column=@Column(name="contact_telephone"))
 	})

@@ -15,11 +15,11 @@
       </tr>
       <tr>
         <td>Contact first name</td>
-        <td><input type="text" name="contact_firstname"/></td>
+        <td><input type="text" name="contact_first_name"/></td>
       </tr>
       <tr>
         <td>Contact surname</td>
-        <td><input type="text" name="contact_surname"/></td>
+        <td><input type="text" name="contact_last_name"/></td>
       </tr>
       <tr>
         <td>Contact email</td>

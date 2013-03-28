@@ -1,4 +1,4 @@
-package org.afrosoft.clientinvoicing.repository;
+package org.afrosoft.clientinvoicing.dao;
 
 import javax.sql.DataSource;
 

@@ -19,19 +19,19 @@
       </tr>
       <tr>
         <td>Contact first name</td>
-        <td><input type="text" name="contact_firstname" value="<c:out value='${currentClient.firstname}'/>"/></td>
+        <td><input type="text" name="contact_first_name" value="<c:out value='${currentClient.contact.firstname}'/>"/></td>
       </tr>
       <tr>
         <td>Contact surname</td>
-        <td><input type="text" name="contact_surname" value="<c:out value='${currentClient.surname}'/>"/></td>
+        <td><input type="text" name="contact_last_name" value="<c:out value='${currentClient.contact.lastName}'/>"/></td>
       </tr>
       <tr>
         <td>Contact email</td>
-        <td><input type="email" name="contact_email" value="<c:out value='${currentClient.email}'/>"/></td>
+        <td><input type="email" name="contact_email" value="<c:out value='${currentClient.contact.email}'/>"/></td>
       </tr>
       <tr>
         <td>Contact telephone</td>
-        <td><input type="tel" name="contact_tel" value="<c:out value='${currentClient.telephone}'/>"/></td>
+        <td><input type="tel" name="contact_tel" value="<c:out value='${currentClient.contact.telephone}'/>"/></td>
       </tr>
       <tr>
         <td>Address line 1</td>

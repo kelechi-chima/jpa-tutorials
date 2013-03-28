@@ -21,6 +21,7 @@ import javax.persistence.TemporalType;
 @NamedQueries({
 	@NamedQuery(name="findProjectByProjectName", 
 			query="SELECT p FROM Project p WHERE p.name = :projectName"),
+			
 	@NamedQuery(name="findProjectsByClientName", 
 			query="SELECT p FROM Client c JOIN c.projects p WHERE c.name = :clientName")
 })

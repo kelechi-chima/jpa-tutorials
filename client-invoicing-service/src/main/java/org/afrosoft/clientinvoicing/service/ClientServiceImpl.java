@@ -2,8 +2,8 @@ package org.afrosoft.clientinvoicing.service;
 
 import java.util.List;
 
+import org.afrosoft.clientinvoicing.dao.ClientDao;
 import org.afrosoft.clientinvoicing.domain.Client;
-import org.afrosoft.clientinvoicing.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,17 +11,17 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("clientService")
 public class ClientServiceImpl implements ClientService {
   
-  private ClientRepository clientRepository;
+  private ClientDao clientDao;
 
   @Autowired
-  public ClientServiceImpl(ClientRepository clientRepository) {
-    this.clientRepository = clientRepository;
+  public ClientServiceImpl(ClientDao clientDao) {
+    this.clientDao = clientDao;
   }
 
   @Transactional(readOnly = true)
   @Override
   public List<Client> getAllClients() {
-    List<Client> clients = clientRepository.getAllClients();
+    List<Client> clients = clientDao.getAllClients();
     
     return clients;
   }
@@ -29,7 +29,7 @@ public class ClientServiceImpl implements ClientService {
   @Transactional
 	@Override
   public Client addClient(Client client) {
-	  clientRepository.addClient(client);
+	  clientDao.addClient(client);
 	  
 	  return client;
   }
@@ -37,7 +37,7 @@ public class ClientServiceImpl implements ClientService {
   @Transactional
 	@Override
   public Client updateClient(Client client) {
-	  client = clientRepository.updateClient(client);
+	  client = clientDao.updateClient(client);
 	  return client;
   }
 

@@ -5,25 +5,25 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Contact {
 
-	private String firstname;
-	private String surname;
+	private String firstName;
+	private String lastName;
 	private String email;
 	private String telephone;
 	
-	public String getFirstname() {
-		return firstname;
+	public String getFirstName() {
+		return firstName;
 	}
 	
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 	
-	public String getSurname() {
-		return surname;
+	public String getLastName() {
+		return lastName;
 	}
 	
-	public void setSurname(String surname) {
-		this.surname = surname;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	
 	public String getEmail() {
@@ -45,8 +45,8 @@ public class Contact {
 	@Override
   public String toString() {
 	  return new StringBuilder().
-	  		append("Contact[firstname=").append(firstname).
-	  		append(", surname=").append(surname).
+	  		append("Contact[first name=").append(firstName).
+	  		append(", last name=").append(lastName).
 	  		append(", email=").append(email).
 	  		append(", telephone=").append(telephone).
 	  		append("]").toString();

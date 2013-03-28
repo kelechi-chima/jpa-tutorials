@@ -21,8 +21,8 @@ public final class RequestParamUtils {
 		address.setPostcode(request.getParameter(CLIENT_POSTCODE));
 
 		Contact contact = new Contact();
-		contact.setFirstname(request.getParameter(CONTACT_FIRST_NAME));
-		contact.setSurname(request.getParameter(CONTACT_SURNAME));
+		contact.setFirstName(request.getParameter(CONTACT_FIRST_NAME));
+		contact.setLastName(request.getParameter(CONTACT_LAST_NAME));
 		contact.setEmail(request.getParameter(CONTACT_EMAIL));
 		contact.setTelephone(request.getParameter(CONTACT_TELEPHONE));
 

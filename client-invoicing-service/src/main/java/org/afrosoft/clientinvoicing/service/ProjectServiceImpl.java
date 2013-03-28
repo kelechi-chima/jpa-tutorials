@@ -2,9 +2,9 @@ package org.afrosoft.clientinvoicing.service;
 
 import java.util.List;
 
+import org.afrosoft.clientinvoicing.dao.ProjectDao;
 import org.afrosoft.clientinvoicing.domain.Client;
 import org.afrosoft.clientinvoicing.domain.Project;
-import org.afrosoft.clientinvoicing.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,17 +12,17 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("projectService")
 public class ProjectServiceImpl implements ProjectService {
 
-  private ProjectRepository projectRepository;
+  private ProjectDao projectDao;
   
   @Autowired
-  public ProjectServiceImpl(ProjectRepository projectRepository) {
-    this.projectRepository = projectRepository;
+  public ProjectServiceImpl(ProjectDao projectDao) {
+    this.projectDao = projectDao;
   }
 
   @Transactional
   @Override
   public Project addProject(Project project, Client client) {
-    project = projectRepository.addProject(project, client);
+    project = projectDao.addProject(project, client);
     
     return project;
   }
@@ -30,7 +30,7 @@ public class ProjectServiceImpl implements ProjectService {
   @Transactional
   @Override
   public Project updateProject(Project project) {
-    project = projectRepository.updateProject(project);
+    project = projectDao.updateProject(project);
     
     return project;
   }
@@ -38,7 +38,7 @@ public class ProjectServiceImpl implements ProjectService {
   @Transactional(readOnly = true)
   @Override
   public List<Project> findByClientName(Client client) {
-    List<Project> projects = projectRepository.findByClientName(client.getName());
+    List<Project> projects = projectDao.findByClientName(client.getName());
     
     return projects;
   }
@@ -46,7 +46,7 @@ public class ProjectServiceImpl implements ProjectService {
   @Transactional(readOnly = true)
   @Override
   public Project findByName(String projectName) {
-  	Project project = projectRepository.findByProjectName(projectName);
+  	Project project = projectDao.findByProjectName(projectName);
   	
 	  return project;
   }
@@ -54,7 +54,7 @@ public class ProjectServiceImpl implements ProjectService {
   @Transactional
 	@Override
   public void removeProject(Project project) {
-    projectRepository.removeProject(project);
+    projectDao.removeProject(project);
   }
 
 }

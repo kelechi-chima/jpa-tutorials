@@ -6,8 +6,8 @@ public final class RequestParams {
 	
 	public static final String CLIENT_ID = "client_id";
 	public static final String CLIENT_NAME = "client_name";
-	public static final String CONTACT_FIRST_NAME = "contact_firstname";
-	public static final String CONTACT_SURNAME = "contact_surname";
+	public static final String CONTACT_FIRST_NAME = "contact_first_name";
+	public static final String CONTACT_LAST_NAME = "contact_last_name";
 	public static final String CONTACT_EMAIL = "contact_email";
 	public static final String CONTACT_TELEPHONE = "contact_tel";
 	public static final String CLIENT_ADDRESS_LINE1 = "address_line_1";

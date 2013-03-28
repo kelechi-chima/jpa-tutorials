@@ -1,10 +1,10 @@
-package org.afrosoft.clientinvoicing.repository;
+package org.afrosoft.clientinvoicing.dao;
 
 import java.util.List;
 
 import org.afrosoft.clientinvoicing.domain.Client;
 
-public interface ClientRepository {
+public interface ClientDao {
 
   List<Client> getAllClients();
   

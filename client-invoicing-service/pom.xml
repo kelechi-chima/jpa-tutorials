@@ -23,7 +23,7 @@
     </dependency>
     <dependency>
       <groupId>org.afrosoft</groupId>
-      <artifactId>client-invoicing-repository</artifactId>
+      <artifactId>client-invoicing-dao</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>

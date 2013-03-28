@@ -1,11 +1,11 @@
-package org.afrosoft.clientinvoicing.repository;
+package org.afrosoft.clientinvoicing.dao;
 
 import java.util.List;
 
 import org.afrosoft.clientinvoicing.domain.Client;
 import org.afrosoft.clientinvoicing.domain.Project;
 
-public interface ProjectRepository {
+public interface ProjectDao {
 
   Project addProject(Project project, Client client);
   

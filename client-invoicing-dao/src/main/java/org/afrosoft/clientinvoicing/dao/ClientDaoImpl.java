@@ -1,4 +1,4 @@
-package org.afrosoft.clientinvoicing.repository;
+package org.afrosoft.clientinvoicing.dao;
 
 import java.util.List;
 
@@ -11,12 +11,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-@Repository("clientRepository")
-public class ClientRepositoryImpl implements ClientRepository {
+@Repository("clientDao")
+public class ClientDaoImpl implements ClientDao {
 
-  private static final Logger LOG = LoggerFactory.getLogger(ClientRepositoryImpl.class);
+  private static final Logger LOG = LoggerFactory.getLogger(ClientDaoImpl.class);
   
-  @PersistenceContext(unitName="client-invoicing", type=PersistenceContextType.TRANSACTION)
+  @PersistenceContext(unitName = "client-invoicing", type = PersistenceContextType.TRANSACTION)
   private EntityManager entityManager;
   
   @Override
@@ -32,7 +32,7 @@ public class ClientRepositoryImpl implements ClientRepository {
   public Client addClient(Client client) {
     entityManager.persist(client);
     
-    LOG.info("Client added with id '{}'", client.getId());
+    LOG.info("Added client with id '{}'", client.getId());
     
     return client;
   }
