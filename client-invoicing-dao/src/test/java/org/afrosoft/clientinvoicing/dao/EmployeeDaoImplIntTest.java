@@ -30,7 +30,7 @@ public class EmployeeDaoImplIntTest extends BaseDaoIntTest {
   public void addEmployee() {
 		assertEquals(1, JdbcTestUtils.countRowsInTable(jdbcTemplate, TABLE_NAME));
 		
-		employeeDao.addEmployee(employee());
+		employeeDao.add(employee());
 		entityManager.flush();
 		
 		assertEquals(2, JdbcTestUtils.countRowsInTable(jdbcTemplate, TABLE_NAME));
@@ -45,7 +45,7 @@ public class EmployeeDaoImplIntTest extends BaseDaoIntTest {
 	  
 	  Employee employee = entityManager.find(Employee.class, 1L);
 	  employee.setFirstName("Janet");
-	  employeeDao.updateEmployee(employee);
+	  employeeDao.update(employee);
 	  entityManager.flush();
 	  
 	  verifyRows(1, TABLE_NAME, whereCondition);
@@ -107,7 +107,7 @@ public class EmployeeDaoImplIntTest extends BaseDaoIntTest {
 		verifyRows(1, TABLE_NAME);
 		
 		Employee employee = entityManager.find(Employee.class, 1L);
-		employeeDao.removeEmployee(employee);
+		employeeDao.remove(employee);
 		entityManager.flush();
 		
 		verifyRows(0, TABLE_NAME);

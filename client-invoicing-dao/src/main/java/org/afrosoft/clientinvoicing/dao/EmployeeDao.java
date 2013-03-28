@@ -7,9 +7,9 @@ import org.afrosoft.clientinvoicing.domain.Role;
 
 public interface EmployeeDao {
 
-	Employee addEmployee(Employee employee);
+	Employee add(Employee employee);
 	
-	Employee updateEmployee(Employee employee);
+	Employee update(Employee employee);
 	
 	Employee findByNationalInsuranceNo(String nationalInsuranceNo);
 	
@@ -19,6 +19,6 @@ public interface EmployeeDao {
 	
 	List<Employee> findByRole(Role employeeRole);
 	
-	void removeEmployee(Employee employee);
+	void remove(Employee employee);
 	
 }

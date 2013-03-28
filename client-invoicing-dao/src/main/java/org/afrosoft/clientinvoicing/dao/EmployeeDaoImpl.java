@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 public class EmployeeDaoImpl extends BaseDao implements EmployeeDao {
 	
 	@Override
-	public Employee addEmployee(Employee employee) {
+	public Employee add(Employee employee) {
 		entityManager.persist(employee);
 		
 		logger.info("Added employee with id '{}'", employee.getId());
@@ -20,7 +20,7 @@ public class EmployeeDaoImpl extends BaseDao implements EmployeeDao {
 	}
 
 	@Override
-	public Employee updateEmployee(Employee employee) {
+	public Employee update(Employee employee) {
 		employee = entityManager.merge(employee);
 		
 		logger.info("Updated employee: {}", employee);
@@ -78,7 +78,7 @@ public class EmployeeDaoImpl extends BaseDao implements EmployeeDao {
 	}
 
 	@Override
-	public void removeEmployee(Employee employee) {
+	public void remove(Employee employee) {
 		entityManager.remove(employee);
 		
 		logger.info("Removed employee: {}", employee);

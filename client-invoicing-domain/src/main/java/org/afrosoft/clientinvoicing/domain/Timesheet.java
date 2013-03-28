@@ -9,10 +9,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+@NamedQueries({
+	@NamedQuery(name = "findTimesheetsByEmployeeName", 
+			query = "SELECT t FROM Timesheet t JOIN t.employee e WHERE e.firstName LIKE :firstName AND e.lastName LIKE :lastName"),
+			
+	@NamedQuery(name = "findTimesheetsByProjectName", 
+			query = "SELECT t FROM Timesheet t JOIN t.project p WHERE p.name LIKE :projectName"),
+	
+	@NamedQuery(name = "findTimesheetsByClientName", 
+			query = "SELECT t FROM Timesheet t JOIN t.project p JOIN p.client c WHERE c.name LIKE :clientName"),			
+})
 @Entity
 public class Timesheet {
 
