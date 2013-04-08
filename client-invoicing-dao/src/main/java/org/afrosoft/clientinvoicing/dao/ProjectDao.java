@@ -7,14 +7,14 @@ import org.afrosoft.clientinvoicing.domain.Project;
 
 public interface ProjectDao {
 
-  Project addProject(Project project, Client client);
+  Project add(Project project, Client client);
   
-  Project updateProject(Project project);
+  Project update(Project project);
   
   List<Project> findByClientName(String clientName);
   
   Project findByProjectName(String projectName);
   
-  void removeProject(Project project);
+  void remove(Project project);
   
 }

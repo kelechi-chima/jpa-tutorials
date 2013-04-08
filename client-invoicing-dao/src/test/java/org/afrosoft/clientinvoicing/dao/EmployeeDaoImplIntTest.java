@@ -2,21 +2,24 @@ package org.afrosoft.clientinvoicing.dao;
 
 import static org.junit.Assert.*;
 
-import java.math.BigDecimal;
 import java.util.List;
 
-import org.afrosoft.clientinvoicing.domain.Address;
 import org.afrosoft.clientinvoicing.domain.Employee;
 import org.afrosoft.clientinvoicing.domain.Role;
-import org.joda.time.DateMidnight;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.jdbc.JdbcTestUtils;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Integration test class for EmployeeDao.<p>
+ * 
+ * If a method in the DAO requires a transaction, then the test method defined here is 
+ * annotated with Spring's @Transactional. Otherwise the test method is not annotated. 
+ */
 public class EmployeeDaoImplIntTest extends BaseDaoIntTest {
 	
 	private static final String TABLE_NAME = "employee";
+	private static final Long EMPLOYEE_ID = 1L;
 	private static final String NATIONAL_INSURANCE_NO = "SC094577E";
 	private static final String FIRST_NAME = "Fred";
 	private static final String LAST_NAME = "Bloggs";
@@ -25,17 +28,26 @@ public class EmployeeDaoImplIntTest extends BaseDaoIntTest {
 	@Autowired
 	private EmployeeDao employeeDao;
 	
+	/**
+	 * Verifies that an employee record is added to the database upon commit.
+	 * @see {@link #setupDatabase()}
+	 */
 	@Transactional
 	@Test
   public void addEmployee() {
-		assertEquals(1, JdbcTestUtils.countRowsInTable(jdbcTemplate, TABLE_NAME));
+		verifyRows(1, TABLE_NAME);
 		
-		employeeDao.add(employee());
+		employeeDao.add(TestUtils.employee());
 		entityManager.flush();
 		
-		assertEquals(2, JdbcTestUtils.countRowsInTable(jdbcTemplate, TABLE_NAME));
+		verifyRows(2, TABLE_NAME);
   }
 
+	/**
+	 * Verifies that changes to an employee record are persisted in the database upon commit.<p>
+	 * 
+	 * This method updates the test record inserted by the inherited method {@link #setupDatabase()}.
+	 */
 	@Transactional
 	@Test
   public void updateEmployee() {
@@ -43,7 +55,7 @@ public class EmployeeDaoImplIntTest extends BaseDaoIntTest {
 	  
 	  verifyRows(0, TABLE_NAME, whereCondition);
 	  
-	  Employee employee = entityManager.find(Employee.class, 1L);
+	  Employee employee = entityManager.find(Employee.class, EMPLOYEE_ID);
 	  employee.setFirstName("Janet");
 	  employeeDao.update(employee);
 	  entityManager.flush();
@@ -51,6 +63,11 @@ public class EmployeeDaoImplIntTest extends BaseDaoIntTest {
 	  verifyRows(1, TABLE_NAME, whereCondition);
   }
 
+	/**
+	 * Verifies that we can retrieve an employee record by matching on the employee's national insurance number.<p>
+	 * 
+	 * This method looks up the test record inserted by the inherited method {@link #setupDatabase()}.
+	 */
 	@Test
   public void findByNationalInsuranceNo() {
 	  String whereCondition = "national_insurance_no = '" + NATIONAL_INSURANCE_NO + "'";
@@ -62,6 +79,11 @@ public class EmployeeDaoImplIntTest extends BaseDaoIntTest {
 	  assertEquals(NATIONAL_INSURANCE_NO, employee.getNationalInsuranceNo());
   }
 
+	/**
+	 * Verifies that we can retrieve an employee record by matching on the employee's first name.<p>
+	 * 
+	 * This method looks up the test record inserted by the inherited method {@link #setupDatabase()}.
+	 */
 	@Test
   public void findByFirstName() {
 	  String whereCondition = "first_name LIKE '" + FIRST_NAME + "'";
@@ -75,6 +97,11 @@ public class EmployeeDaoImplIntTest extends BaseDaoIntTest {
 	  assertTrue(employee.getFirstName().contains(FIRST_NAME));
   }
 
+	/**
+	 * Verifies that we can retrieve an employee record by matching on the employee's last name.<p>
+	 *  
+	 * This method looks up the test record inserted by the inherited method {@link #setupDatabase()}.
+	 */
 	@Test
   public void findByLastName() {
 	  String whereCondition = "last_name LIKE '" + LAST_NAME + "'";
@@ -88,6 +115,11 @@ public class EmployeeDaoImplIntTest extends BaseDaoIntTest {
 	  assertTrue(employee.getLastName().contains(LAST_NAME));
   }
 
+	/**
+	 * Verifies that we can retrieve an employee record by matching on the employee's role.<p>
+	 * 
+	 * This method looks up the test record inserted by the inherited method {@link #setupDatabase()}.
+	 */
 	@Test
   public void findByRole() {
 	  String whereCondition = "role = '" + ROLE + "'";
@@ -101,38 +133,21 @@ public class EmployeeDaoImplIntTest extends BaseDaoIntTest {
 	  assertEquals(Role.DEVELOPER, employee.getRole());
   }
 
+	/**
+	 * Verifies that an employee record that is removed is really removed from the database upon commit.<p>
+	 * 
+	 * This method removes the test record inserted by the inherited method {@link #setupDatabase()}.
+	 */
 	@Transactional
 	@Test
   public void removeEmployee() {
 		verifyRows(1, TABLE_NAME);
 		
-		Employee employee = entityManager.find(Employee.class, 1L);
+		Employee employee = entityManager.find(Employee.class, EMPLOYEE_ID);
 		employeeDao.remove(employee);
 		entityManager.flush();
 		
 		verifyRows(0, TABLE_NAME);
   }
-	
-	private Employee employee() {
-		Employee e = new Employee();
-		e.setNationalInsuranceNo("AX497822E");
-		e.setFirstName("Jane");
-		e.setLastName("Smith");
-		e.setDateOfBirth(new DateMidnight(1975, 5, 15).toDate());
-		e.setRole(Role.ANALYST);
-		e.setRate(new BigDecimal(30.75));
-		e.setAddress(address());
-		return e;
-	}
-	
-	private Address address() {
-		Address a = new Address();
-		a.setLine1("line1");
-		a.setLine2("line2");
-		a.setLine3("line3");
-		a.setLine4("line4");
-		a.setPostcode("postcode");
-		return a;
-	}
 
 }

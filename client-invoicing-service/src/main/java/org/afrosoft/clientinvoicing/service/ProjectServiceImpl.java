@@ -22,7 +22,7 @@ public class ProjectServiceImpl implements ProjectService {
   @Transactional
   @Override
   public Project addProject(Project project, Client client) {
-    project = projectDao.addProject(project, client);
+    project = projectDao.add(project, client);
     
     return project;
   }
@@ -30,7 +30,7 @@ public class ProjectServiceImpl implements ProjectService {
   @Transactional
   @Override
   public Project updateProject(Project project) {
-    project = projectDao.updateProject(project);
+    project = projectDao.update(project);
     
     return project;
   }
@@ -54,7 +54,7 @@ public class ProjectServiceImpl implements ProjectService {
   @Transactional
 	@Override
   public void removeProject(Project project) {
-    projectDao.removeProject(project);
+    projectDao.remove(project);
   }
 
 }

@@ -1,6 +1,7 @@
 package org.afrosoft.clientinvoicing.domain;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -42,7 +43,7 @@ public class Client {
 	private Address address;
 	
 	@OneToMany(mappedBy="client", cascade={CascadeType.MERGE})
-	private Set<Project> projects;
+	private List<Project> projects;
 	
 	public String getName() {
 		return name;
@@ -68,11 +69,14 @@ public class Client {
 		this.address = address;
 	}
 	
-	public Set<Project> getProjects() {
+	public List<Project> getProjects() {
+		if (projects == null) {
+			projects = new ArrayList<Project>();
+		}
 		return projects;
 	}
 	
-	public void setProjects(Set<Project> projects) {
+	public void setProjects(List<Project> projects) {
 		this.projects = projects;
 	}
 	

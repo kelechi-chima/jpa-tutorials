@@ -29,7 +29,7 @@ public class ClientServiceImpl implements ClientService {
   @Transactional
 	@Override
   public Client addClient(Client client) {
-	  clientDao.addClient(client);
+	  clientDao.add(client);
 	  
 	  return client;
   }
@@ -37,7 +37,7 @@ public class ClientServiceImpl implements ClientService {
   @Transactional
 	@Override
   public Client updateClient(Client client) {
-	  client = clientDao.updateClient(client);
+	  client = clientDao.update(client);
 	  return client;
   }
 

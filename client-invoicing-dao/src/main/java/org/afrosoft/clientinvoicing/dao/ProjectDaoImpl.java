@@ -2,41 +2,30 @@ package org.afrosoft.clientinvoicing.dao;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
-
 import org.afrosoft.clientinvoicing.domain.Client;
 import org.afrosoft.clientinvoicing.domain.Project;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 @Repository("projectDao")
-public class ProjectDaoImpl implements ProjectDao {
-
-  private static final Logger LOG = LoggerFactory.getLogger(ProjectDaoImpl.class);
-  
-  @PersistenceContext(unitName = "client-invoicing", type = PersistenceContextType.TRANSACTION)
-  private EntityManager entityManager;
+public class ProjectDaoImpl extends BaseDao implements ProjectDao {
   
   @Override
-  public Project addProject(Project project, Client client) {
+  public Project add(Project project, Client client) {
     Client currentClient = entityManager.merge(client);
     currentClient.getProjects().add(project);
     project.setClient(currentClient);
     entityManager.persist(project);
     
-    LOG.info("Added project with id '{}'", project.getId());
+    logger.info("Added project with id '{}'", project.getId());
     
     return project;
   }
 
   @Override
-  public Project updateProject(Project project) {
+  public Project update(Project project) {
     project = entityManager.merge(project);
     
-    LOG.info("Updated project: {}", project);
+    logger.info("Updated project: {}", project);
     
     return project;
   }
@@ -47,22 +36,26 @@ public class ProjectDaoImpl implements ProjectDao {
         .setParameter("clientName", clientName)
         .getResultList();
 
-    LOG.info("Found {} projects for {}", projects.size(), clientName);
+    logger.info("Found {} projects for {}", projects.size(), clientName);
       
     return projects;
   }
 
   @Override
   public Project findByProjectName(String projectName) {
-  	Project project = entityManager.createNamedQuery("findProjectByProjectName", Project.class)
+  	List<Project> projects = entityManager.createNamedQuery("findProjectByProjectName", Project.class)
   			.setParameter("projectName", projectName)
-  			.getSingleResult();
+  			.getResultList();
   		
-	  return project;
+  	if (projects != null && !projects.isEmpty()) {
+  		return projects.get(0);
+  	}
+  	
+	  return null;
   }
 
   @Override
-  public void removeProject(Project project) {
+  public void remove(Project project) {
     entityManager.remove(project);
   }
 

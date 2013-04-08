@@ -17,13 +17,16 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.jdbc.JdbcTestUtils;
 
+/**
+ * Base class for integration test classes.<p>
+ * 
+ * Defines methods to set up and tear down the test database, as well
+ * as methods to verify the content of database tables.
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfig.class)
 @ActiveProfiles("dev")
 public abstract class BaseDaoIntTest {
-	
-	/** ID defined in insert-test-data.sql */
-	protected Long rowID = 1L;
 	
 	@Autowired
 	protected JdbcTemplate jdbcTemplate;
@@ -35,21 +38,40 @@ public abstract class BaseDaoIntTest {
 	@PersistenceContext(unitName = "client-invoicing", type = PersistenceContextType.TRANSACTION)
 	protected EntityManager entityManager;
 
+	/**
+	 * Set up the test database before running each test method.<p>
+	 * It executes sql commands contained in test sql resources.
+	 */
 	@Before
 	public void setupDatabase() {
 		JdbcTestUtils.executeSqlScript(jdbcTemplate, new ClassPathResource("delete-test-data.sql"), false);
 		JdbcTestUtils.executeSqlScript(jdbcTemplate, new ClassPathResource("insert-test-data.sql"), false);
 	}
 	
+	/**
+	 * Clear down the test database after running each test method.<p>
+	 * It executes sql commands contained in test sql resources.
+	 */
 	@After
 	public void clearDatabase() {
 		JdbcTestUtils.executeSqlScript(jdbcTemplate, new ClassPathResource("delete-test-data.sql"), false);
 	}
 	
+	/**
+	 * Verifies the number of rows in the specified table that match the specified condition.
+	 * @param expectedNo - the number of rows we expect to find
+	 * @param tableName - the table to check against
+	 * @param whereCondition - the sql where condition, e.g. "first_name = 'joe'"
+	 */
 	protected void verifyRows(int expectedNo, String tableName, String whereCondition) {
 		assertEquals(expectedNo, JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, tableName, whereCondition));
 	}
 	
+	/**
+	 * Verifies the number of rows in the specified table.
+	 * @param expectedNo - the number of rows we expect to find
+	 * @param tableName - the table to check against
+	 */
 	protected void verifyRows(int expectedNo, String tableName) {
 		assertEquals(expectedNo, JdbcTestUtils.countRowsInTable(jdbcTemplate, tableName));
 	}

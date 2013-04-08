@@ -45,11 +45,12 @@
   </beans>
   
   <beans profile="dev">
-    <bean id="clientInvoicingDS" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <bean id="clientInvoicingDS" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
       <property name="driverClassName" value="org.postgresql.Driver"/>
       <property name="url" value="jdbc:postgresql://localhost/clientinvoicingdev"/>
       <property name="username" value="kelechi"/>
       <property name="password" value="owerri82"/>
+      <property name="initialSize" value="3"/>
     </bean>
   </beans>  
   

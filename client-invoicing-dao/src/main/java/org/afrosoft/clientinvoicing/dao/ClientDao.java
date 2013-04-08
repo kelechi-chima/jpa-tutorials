@@ -8,10 +8,10 @@ public interface ClientDao {
 
   List<Client> getAllClients();
   
-  Client addClient(Client client);
+  Client add(Client client);
   
-  Client updateClient(Client client);
+  Client update(Client client);
   
-  void removeClient(Client client);
+  void remove(Client client);
   
 }
